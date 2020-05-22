@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged in user</title>
+</head>
+<body>
+    <div>
+        welcome {{request.user}}
+        <a href="/logout">Logout</a>
+        <a href="/password_change/">change password</a>
+    </div>
+        {% block content %}
+
+        {% endblock %}
+</body>
+</html>
