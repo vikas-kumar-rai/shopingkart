@@ -4,7 +4,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('',views.index, name="home"),
+    path('',views.Home.as_view(), name="home"),
     path('login',views.loginUser, name="login"),
     # path('change_password',views.ChangePassword, name="change passsword"),
     path('logout',views.logoutUser, name="logout"),
@@ -26,5 +26,10 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
          name='password_reset_complete'),
     path('register/', views.register, name = 'register'),
+    path('shopkeeper-reg/', views.shopkeeper_reg, name = "shopkeeper-reg"),
     path('oauth/', include('social_django.urls', namespace='social')),
+
+    path('address/', views.address, name='address'),
+    path('product/<int:pk>/', views.ItemDetailView.as_view(), name='product'),
+
 ]

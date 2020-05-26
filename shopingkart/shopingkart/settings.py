@@ -137,3 +137,14 @@ LOGIN_REDIRECT_URL = 'home'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '2810221105761724'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '6db69d07f37156d8ca761a7815263b70'
+
+
+
+EMAIL_USE_TLS=True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='vikaskumar.zapbuild@gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_PASSWORD='Welcome@vikas'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
+MEDIA_URL = '/images/'
