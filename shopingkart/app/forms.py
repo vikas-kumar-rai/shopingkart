@@ -53,3 +53,11 @@ class AddressForm(forms.ModelForm):
             address.user = CustomerRegistration.objects.get(customer_id=self.kwargs['customer_id'])
             address.save()
 
+class CouponForm(forms.Form):
+    code = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Promo code',
+        'aria-label': 'Recipient\'s username',
+        'aria-describedby': 'basic-addon2'
+    }))
+

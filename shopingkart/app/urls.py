@@ -28,8 +28,12 @@ urlpatterns = [
     path('register/', views.register, name = 'register'),
     path('shopkeeper-reg/', views.shopkeeper_reg, name = "shopkeeper-reg"),
     path('oauth/', include('social_django.urls', namespace='social')),
-
+    path('order-summary/', views.OrderSummaryView.as_view(), name='order-summary'),
     path('address/', views.address, name='address'),
-    path('product/<int:pk>/', views.ItemDetailView.as_view(), name='product'),
+    path('product/<slug>/', views.ItemDetailView.as_view(), name='product'),
+    path('add-to-cart/<slug>/', views.add_to_cart, name='add-to-cart'),
+    path('add-coupon/', views.AddCouponView.as_view(), name='add-coupon'),
+    path('remove-from-cart/<slug>/', views.remove_from_cart, name='remove-from-cart'),
+    path('remove-item-from-cart/<slug>/', views.remove_single_item_from_cart, name='remove-single-item-from-cart'),
 
 ]

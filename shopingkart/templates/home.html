@@ -12,7 +12,7 @@
             <div class="card">
 
               <div class="view overlay">
-                <a href="{% url 'product' item.id %}">
+                <a href="{% url 'product' item.slug %}">
                 <img src="{{ item.image.url }}" class="card-img-top"></a>
 <!--                <a href="{{ item.get_absolute_url }}">-->
 <!--                  <div class="mask rgba-white-slight"></div>-->
@@ -26,7 +26,7 @@
                 <h5>
                   <strong>
 <!--                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}-->
-                      <a href="{% url 'product' item.id %}" class="dark-grey-text">{{ item.title }}
+                      <a href="{% url 'product' item.slug %}" class="dark-grey-text">{{ item.title }}
                     </a>
                   </strong>
                 </h5>
