@@ -83,7 +83,7 @@ class Address(models.Model):
     address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
     phone = models.IntegerField(_('phone number'))
     default = models.BooleanField(default=True)
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
     # def __str__(self):

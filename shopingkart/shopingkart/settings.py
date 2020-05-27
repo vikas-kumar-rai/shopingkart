@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "app",
     "social_django",
+    'crispy_forms',
+    'django_countries',
 ]
 
 MIDDLEWARE = [
@@ -144,7 +146,9 @@ EMAIL_USE_TLS=True
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_HOST_USER='vikaskumar.zapbuild@gmail.com'
 EMAIL_PORT=587
-EMAIL_HOST_PASSWORD='Welcome@vikas'
+EMAIL_HOST_PASSWORD=''
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 MEDIA_URL = '/images/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
