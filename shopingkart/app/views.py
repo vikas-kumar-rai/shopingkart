@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate, login
-from .forms import RegistrationForm, ShopkeeperRegForm, CouponForm, CheckoutForm, PaymentForm, AddressForm
-from .models import Address, Item, OrderItem, Coupon, Order, Payment, UserProfile
+from .forms import RegistrationForm, CouponForm, CheckoutForm, AddressForm, ShopkeeperContactForm, ItemForm
+from .models import Address, Item, OrderItem, Coupon, Order, Payment, UserProfile, ShopkeeperContact
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.mail import send_mail
 from shopingkart import settings
@@ -70,47 +70,18 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 
-
-def shopkeeper_reg(request):
+def Contact(request):
     if request.method == 'POST':
-        form = ShopkeeperRegForm(request.POST)
+        form = ShopkeeperContactForm(request.POST)
         if form.is_valid():
-            request.user.is_shopkeeper = True
-            email = form.cleaned_data.get("email")
             form.save()
-            subject = 'registration'
-            msg = "successfully register"
-            print("njsnjn", email)
-            to = email
-            res = send_mail(subject, msg, settings.EMAIL_HOST_USER, [to])
-            if (res == 1):
-                msg = "Mail sent"
-                print("mail sent")
-            else:
-                msg = "Mail could not send"
-
-            return redirect('login')
+            return redirect('home')
     else:
-        form = ShopkeeperRegForm()
-    return render(request, 'register.html', {'form': form})
-#
-# class AddressView(view):
-#     form = AddressForm()
-#
-#     def get(self, request, id, *args, **kwargs):
-#         address = Address.objects.filter(user=id)
-#         context = {
-#             'obj': address,
-#             'form': self.form
-#         }
-#         return render(request, 'index.html', context)
-#
-#     def post(self, request, *args, **kwargs):
-#         if form.is_valid():
-#             form.save()
-#             return redirect('home')
-#         return redirect("address.html")
-#
+        form = ShopkeeperContactForm()
+    return render(request, 'address.html', {'form': form})
+
+
+
 @login_required()
 def address(request):
     if request.method == 'POST':
@@ -124,6 +95,19 @@ def address(request):
         form = AddressForm()
     return render(request, 'address.html', {'form': form})
 
+
+@login_required()
+def AddProduct(request):
+    if request.method == 'POST':
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            u = form.save(commit=False)
+            u.user = request.user
+            u.save()
+            return redirect('home')
+    else:
+        form = ItemForm()
+    return render(request, 'address.html', {'form': form})
 
 class ItemDetailView(DetailView):
     model = Item
@@ -575,5 +559,5 @@ def charge(request): # new
         order.save()
 
         messages.success(request, "Your order was successful!")
-        return render(request, 'address.html')
+        return render(request, 'home.html')
         # return redirect('/')

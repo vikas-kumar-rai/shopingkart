@@ -75,6 +75,22 @@ class CustomerRegistration(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('Users')
 
 
+class ShopkeeperContact(models.Model):
+    full_name = models.CharField(max_length=20)
+    email = models.EmailField()
+    shop_name = models.CharField(max_length=20)
+    shop_address = models.CharField(max_length=50)
+    zip_code = models.IntegerField()
+    gst_number = models.CharField(max_length=20)
+    phone = models.IntegerField()
+
+
+
+    def __str__(self):
+        return self.email
+        return self.email
+
+
 class Address(models.Model):
     street_address = models.CharField(max_length=50)
     apartment_address = models.CharField(max_length=50)
@@ -118,7 +134,7 @@ class Item(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     image = models.ImageField(upload_to = upload_image_path)
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null = True, blank = True)
 
 
     def __str__(self):

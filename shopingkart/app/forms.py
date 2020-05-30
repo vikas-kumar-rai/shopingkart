@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomerRegistration, Address, Item
+from .models import CustomerRegistration, Address, Item, ShopkeeperContact
 from django.contrib.auth import get_user_model
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
@@ -33,24 +33,16 @@ class RegistrationForm(UserCreationForm):
         return email
 
 
-
-class ShopkeeperRegForm(UserCreationForm):
+class ShopkeeperContactForm(forms.ModelForm):
     class Meta:
-        model = CustomerRegistration
-        fields = ('full_name', 'email', )
+        model = ShopkeeperContact
+        fields = '__all__'
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        qs = get_user_model().objects.filter(email=email)
-        if qs.exists():
-            raise forms.ValidationError("email is taken")
-        return email
 
-    def save(self):
-        get_user_model().is_shopkeeper = True
-        user = super(ShopkeeperRegForm, self).save()
-
-        return user
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ('title', 'price', 'discount_price', 'category', 'slug', 'description', 'image',)
 
 
 class AddressForm(forms.ModelForm):
@@ -87,8 +79,8 @@ class CheckoutForm(forms.Form):
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
 
-
-class PaymentForm(forms.Form):
-    stripeToken = forms.CharField(required=False)
-    save = forms.BooleanField(required=False)
-    use_default = forms.BooleanField(required=False)
+#
+# class PaymentForm(forms.Form):
+#     stripeToken = forms.CharField(required=False)
+#     save = forms.BooleanField(required=False)
+#     use_default = forms.BooleanField(required=False)
