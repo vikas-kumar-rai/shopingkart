@@ -152,3 +152,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 MEDIA_URL = '/images/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+STRIPE_SECRET_KEY = 'sk_test_tUWyyQEWDjE8YQRDfVTMhOII00XvMbehJE'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_7qyvzdWvNskoksO8u5u51qbn00C5mgJxcZ'

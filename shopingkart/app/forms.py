@@ -14,9 +14,10 @@ ADDRESS_CHOICES = (
 )
 
 PAYMENT_CHOICES = (
-    ('D', 'Debit Card'),
-    ('P', 'Paytm')
+    ('S', 'Stripe'),
+    ('P', 'PayPal')
 )
+
 
 
 class RegistrationForm(UserCreationForm):
@@ -51,17 +52,12 @@ class ShopkeeperRegForm(UserCreationForm):
 
         return user
 
-#
-# class AddressForm(forms.ModelForm):
-#     class Meta:
-#         model = Address
-#         # fields = '__all__'
-#         fields = ['street_address', 'apartment_address', 'country', 'zip', 'address_type', 'phone', ]
-#
-#         def form_valid(self, form):
-#             address = form.save(commit=False)
-#             address.user = CustomerRegistration.objects.get(customer_id=self.kwargs['customer_id'])
-#             address.save()
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        # fields = '__all__'
+        fields = ['street_address', 'apartment_address', 'country', 'zip', 'address_type', 'phone', ]
 
 class CouponForm(forms.Form):
     code = forms.CharField(widget=forms.TextInput(attrs={
@@ -86,22 +82,13 @@ class CheckoutForm(forms.Form):
     address_type = forms.ChoiceField(
         widget=forms.RadioSelect, choices=ADDRESS_CHOICES)
 
-    # billing_address = forms.CharField(required=False)
-    # billing_address2 = forms.CharField(required=False)
-    # billing_country = CountryField(blank_label='(select country)').formfield(
-    #     required=False,
-    #     widget=CountrySelectWidget(attrs={
-    #         'class': 'custom-select d-block w-100',
-    #     }))
-    # billing_zip = forms.CharField(required=False)
-    #
-    # same_billing_address = forms.BooleanField(required=False)
-    # set_default_shipping = forms.BooleanField(required=False)
     use_default_shipping = forms.BooleanField(required=False)
-    # set_default_billing = forms.BooleanField(required=False)
-    # use_default_billing = forms.BooleanField(required=False)
 
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
 
 
+class PaymentForm(forms.Form):
+    stripeToken = forms.CharField(required=False)
+    save = forms.BooleanField(required=False)
+    use_default = forms.BooleanField(required=False)

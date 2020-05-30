@@ -43,7 +43,7 @@
                   </div>
                 </div>
                 <div class="md-form mb-5">
-                  <input type='tel' placeholder='Enter your phone number' id='phone' name='phone' pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class='form-control' />
+                  <input type='phone' placeholder='Enter your phone number' id='phone' name='phone' pattern="[0-9]{10}" class='form-control' />
                   <label for="phone" class="">phone number:</label>
                 </div>
 
@@ -125,19 +125,19 @@
 <!--              {% endif %}-->
 <!--              <hr>-->
 
-              <h3>Payment option</h3>
+<!--              <h3>Payment option</h3>-->
 
-              <div class="d-block my-3">
-                {% for value, name in form.fields.payment_option.choices %}
-                <div class="custom-control custom-radio">
-                  <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
-                  <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
-                </div>
-                {% endfor %}
-              </div>
+<!--              <div class="d-block my-3">-->
+<!--                {% for value, name in form.fields.payment_option.choices %}-->
+<!--                <div class="custom-control custom-radio">-->
+<!--                  <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>-->
+<!--                  <label class="custom-control-label" for="{{ name }}">{{ name }}</label>-->
+<!--                </div>-->
+<!--                {% endfor %}-->
+<!--              </div>-->
 
               <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit" href="{% url 'payment' %}">Proceed To Pay</button>
 
             </form>
 
@@ -159,7 +159,7 @@
 {% block extra_scripts %}
 <script>
 var hideable_shipping_form = ₹('.hideable_shipping_form');
-var hideable_billing_form = ₹('.hideable_billing_form');
+<!--var hideable_billing_form = ₹('.hideable_billing_form');-->
 
 var use_default_shipping = document.querySelector("input[name=use_default_shipping]");
 <!--var use_default_billing = document.querySelector("input[name=use_default_billing]");-->
@@ -172,13 +172,13 @@ use_default_shipping.addEventListener('change', function() {
   }
 })
 
-use_default_billing.addEventListener('change', function() {
-  if (this.checked) {
-    hideable_billing_form.hide();
-  } else {
-    hideable_billing_form.show();
-  }
-})
+<!--use_default_billing.addEventListener('change', function() {-->
+<!--  if (this.checked) {-->
+<!--    hideable_billing_form.hide();-->
+<!--  } else {-->
+<!--    hideable_billing_form.show();-->
+<!--  }-->
+<!--})-->
 
 </script>
 {% endblock extra_scripts %}
