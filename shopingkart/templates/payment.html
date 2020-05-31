@@ -4,13 +4,16 @@
 
 {% extends "base.html" %}
 {% block content %}
+
 <form action="{% url 'charge' %}" method="post">
   {% csrf_token %}
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="pk_test_7qyvzdWvNskoksO8u5u51qbn00C5mgJxcZ"
           data-description=""
-          data-amount="{{order.get_total}}"
-          data-locale="auto"></script>
+          data-amount="{{price}}"
+          data-locale="auto"
+          data-currency="INR">
+  </script>
 </form>
 
         {% include "order_snippet.html" %}
