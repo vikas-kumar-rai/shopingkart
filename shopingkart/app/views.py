@@ -354,6 +354,7 @@ class ItemSearch(ListView):
 
     def get_queryset(self, *args, **kwargs):
         val = self.request.GET.get("q")
+        print('***********************', val)
         if val:
             object_list = Item.objects.filter(
                 Q(title__icontains=val) |
@@ -361,6 +362,7 @@ class ItemSearch(ListView):
                 Q(description__icontains=val)|
                 Q(slug__icontains=val)
                 ).distinct()
+            print(object_list)
         else:
             object_list  = Item.objects.none()
         return object_list
@@ -377,7 +379,7 @@ class PaymentView(TemplateView):
         context['key'] = "pk_test_7qyvzdWvNskoksO8u5u51qbn00C5mgJxcZ"
         return context
 
-def charge(request): # new
+def charge(request):
     if request.method == 'POST':
         order = Order.objects.get(user=request.user, ordered=False)
 
@@ -410,4 +412,3 @@ def charge(request): # new
 
         messages.success(request, "Your order was successful!")
         return render(request, 'payment_success.html')
-        # return redirect('/')
